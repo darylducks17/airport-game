@@ -1,5 +1,6 @@
 import time #imports a module to add a pause 
-
+import sys
+from credits import *
 
 #figuring our how users might respond 
 answer_A = ["A", "a"]
@@ -20,17 +21,17 @@ boarding_pass = 0
 def intro():
     print("\nENTRANCE\n")
     print ("""You are at the entrance to X Aiport, a small town airport with not much to see.  
-    \nNext to you is the stinky, old toilet that smells like a decomposing body. 
+    \nNext to you is the stinky, old toilet that smells like decomposing bodies. 
     \nHowever, if you ignore the odour and look straight ahead you will see the check-in desks to your right and the airport security to the left.""")
-
-    time.sleep(1)
+    good_ending()
+    '''time.sleep(1)
 
     print (""" 
     A. Go to the toilet.
-    B. Go straight to the check- in desk.
+    B. Go straight to the check-in desk.
     C. Go straight to airport security.""")
 
-    choice = input(">>>") #here is the first choice 
+    choice = input("\n>>> ")
     if choice in answer_A:
         toilet()
     elif choice in answer_B:
@@ -38,8 +39,12 @@ def intro():
     elif choice in answer_C:
         security()
     else:
-        print ("\nUse only A, B, or C\n")
-        intro()
+        print ("\nUse only A, B, or C please!\n")
+        intro()'''
+
+
+
+
 
 def toilet():
     print("\nTOILET\n")
@@ -53,9 +58,9 @@ def toilet():
 
     print(""" 
     A. Go straight back to the entrance because you can't stand the stench.
-    B. Pick the note up and go to the toilet as quick as you can. """)
+    B. Pick up the note, go to the toilet and head to the check-in area as quick as you can. """)
 
-    choice = input(">>>")
+    choice = input("\n>>> ")
     if choice in answer_A:
         intro()
     elif choice in answer_B:
@@ -63,7 +68,7 @@ def toilet():
         time.sleep(1)
         print("\nNOTE: You are in a battle royale. Be careful out there and good luck!")
         time.sleep(1)
-        intro()
+        check_in()
     else:
         print ("\n Use only A or B\n")
         toilet()
@@ -80,10 +85,11 @@ def check_in():
     time.sleep(1)
 
     print("""
-    A. Go straight to airport security now and not pick the shiny card up becuase you don't know what it is.
-    B. Pick the card up and then proceed to the security screening area. """)
+    A. Go straight to airport security now because you are in a hurry.
+    B. Pick the card up and then proceed to the security screening area.
+    C. Head back to the entrance because you are petrified.""")
 
-    choice = input(">>>")
+    choice = input("\n>>> ")
     if choice in answer_A:
         security()
     elif choice in answer_B:
@@ -91,20 +97,21 @@ def check_in():
         print ("Ahhh it was a boarding pass...This might come in handy!")
         time.sleep(1)
         security()
-        
+    elif choice in answer_C:
+        intro()
     else:
         print("\n Use only A or B\n")
         check_in()
 
 def security():
     print("\nSECURITY SCREENING AREA\n")
-    print("""You are standing in the most feared area, known as the security check-in. 
+    print("""You are standing in the most feared area, also known as the security screening. 
     \nAgain, this area seems to be lacking passengers, so you wonder when the guards appeared.
     \nHmmmmmm...""")
 
     time.sleep(1)
 
-    print("\nAs you walk towards the large scanning machines, one security guard abrptly asks 'What are you doing at this airport?")
+    print("\nAs you walk towards the large scanning machines, one security guard abruptly asks 'What are you doing at this airport?")
 
     time.sleep(1)
 
@@ -119,7 +126,7 @@ def security():
         print("The security guard doesn't look too pleased. ")
         time.sleep(1)
         if note < 0:
-            print("""He punches you several times until he made sure you DIE... 
+            print("""He punches you several times until he made sure you DIED... 
             YOU'RE DEAD, GAME OVER!!""")
             intro()
         else:
@@ -129,7 +136,7 @@ def security():
     elif choice in answer_B:
         print("The security guard doesn't look too pleased.")
         time.sleep(1)
-        if note < 0:
+        if note != 1:
             print("""He punches you several times until he made sure you DIE... 
             YOU DEAD, GAME OVER!!""")
         else:
@@ -139,7 +146,14 @@ def security():
     elif choice in answer_C:
         print("The security guard laughs and lets you through...")
 
-        if note > 0 and boarding_pass > 0:
+        if note != 1 and boarding_pass != 1:
+            time.sleep(1)
+            print("""The guard's face turned sour, he doesn't look too pleased... 
+            When you laid your eyes towards the duty free shops, He directs a forceful punch to your stomach...""")
+            time.sleep(1)
+            print("YOU'RE DEAD, GAME OVER!!")
+            intro()
+        else:
             print("""\nYou knew the whole thing is a set up, so you FLING your boarding pass to the guards neck... 
             \nHis neck sliced open which led his colleagues to chase you, but you fought through with your bare hands.
             \nNow, the whole screening area is covered with corpses... The corpses YOU killed with your bare hands... 
@@ -153,13 +167,7 @@ def security():
                 duty_free()
             else:
                 duty_free()
-        else:
-          time.sleep(1)
-          print("""The guard's face turned sour, he doesn't look too pleased... 
-          When you laid your eyes towards the duty free shops, He directs a forceful punch to your stomach...""")
-          time.sleep(1)
-          print("YOU'RE DEAD, GAME OVER!!")
-          intro()
+          
             
     elif choice in answer_D:
         print("Security: You come over here... Let me check your passport.")
